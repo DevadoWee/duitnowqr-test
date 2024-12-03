@@ -67,15 +67,15 @@ const qr3 = generateDuitNowStr({
 
 
 //!!! Try this with your own TnG duitNow !!tis one won't work due to for privacy purpose
-const tngDuitNow = "00020201021126440014A0000006150001010689005302121102928373325204000053034585802MY5910JAMESONLAM6002MY6213060988866479363043A1C"
-const qrTngDuitNow = generateDuitNowStr({
+const tngReceiveQR = "00020201021126440014A0000006150001010689005302121102928373325204000053034585802MY5910JAMESONLAM6002MY6213060988866479363043A1C"
+const qrTngReceiveQR = generateDuitNowStr({
     app: "890053",
     account: "110292837332",
     name: "JAMESONLAM",
     id62ref6: "888664793"
 })
 
-assert.equal(tngDuitNow, qrTngDuitNow)
+assert.equal(tngReceiveQR, qrTngReceiveQR)
 
 
 
