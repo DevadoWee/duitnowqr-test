@@ -1,14 +1,18 @@
 
 ## DuitNow QR Code Generator Test
 
-This is largely forked from (https://github.com/natsu90/duitnowqr-test).
-Researching DuitNowQR for future projects. You might wanna view his 'readMe' before continuing with mine.
+This is largely forked from (https://github.com/natsu90/duitnowqr-test).  
+Researching DuitNowQR for future projects. You might wanna view his 'readMe' before continuing with mine.  
 Compared to other projects of DuitNowQR, am very appreciative of his comprehensive yet concised readMe.
-
+\
+\
 Thus far I.ve done...
-1. breakDownQR function, to break down QR string, and show it in the form of list<dictionary>. (Easier on the eyes)
-2. generateHTMLPinkWhiteQR function, generate pink-white QR, saved in the form of HTML. (Had trouble changing colour via qrcode.generate())
-3. Add some additional fields based on the DuitNow standard v1.4 (remained remark/commented)
+1. breakDownQR function, to break down QR string, and show it in the form of list<dictionary>.
+   - (Easier on the eyes)
+2. generateHTMLPinkWhiteQR function, generate pink-white QR, saved in the form of HTML.
+   - (Had trouble changing colour via qrcode.generate())
+3. Add some additional fields based on the DuitNow standard v1.4
+   - (remained remark/commented)
 4. Lengthy explanation on how to understand QR string below
 
 ### How To Read QR String
