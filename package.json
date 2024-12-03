@@ -6,9 +6,9 @@
   "dependencies": {
     "duitnow-js": "gist:f45dc88b38a037325ad9095163b82b42",
     "moment": "^2.29.4",
+    "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "node test.js"
   },

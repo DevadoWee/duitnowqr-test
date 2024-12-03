@@ -62,15 +62,33 @@ const qr3 = generateDuitNowStr({
     app: '588734', // unknown ID from MAE app
     // expiry: '1690590054577', // datetime in miliseconds
     name: 'TEST NAME DUITNOW'
-
 })
-
 // assert.equal(string3, qr3)
 
 
-qrcode.generate(qr3); //Generate QR
+//!!! Try this with your own TnG duitNow !!tis one won't work due to for privacy purpose
+const tngDuitNow = "00020201021126440014A0000006150001010689005302121102928373325204000053034585802MY5910JAMESONLAM6002MY6213060988866479363043A1C"
+const qrTngDuitNow = generateDuitNowStr({
+    app: "890053",
+    account: "110292837332",
+    name: "JAMESONLAM",
+    id62ref6: "888664793"
+})
+
+assert.equal(tngDuitNow, qrTngDuitNow)
+
+
+
+// qrcode.generate(qr3); //Generate QR
 // console.log(breakDownQR(qr3)); //breakdown the qr string
-// generateHTMLPinkWhiteQR(qr3); //Generate QR in Pink, but only in html.
+generateHTMLPinkWhiteQR(qrTngDuitNow); //Generate QR in Pink, but only in html.
+
+
+
+
+
+
+
 
 
 function generateHTMLPinkWhiteQR(qrString){
