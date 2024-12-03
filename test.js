@@ -12,7 +12,7 @@ const qr1 = generateDuitNowStr({
     expiry: '1691388675582', // datetime in miliseconds
     amount: 1,
     name: 'MOHD SULAIMAN BIN HAJI SUDIRMAN',
-    ref5: 'MAEPP111135170129807' // Reference Label
+    id62ref5: 'MAEPP111135170129807' // Reference Label
 
 })
 
@@ -28,10 +28,10 @@ const qr2 = generateDuitNowStr({
     name: 'GINTELL REST N GO SDN BHD',
     city: 'KEPONG MENJALARA',
     postcode: '52200',
-    ref5: '0.1626.0', // Reference Label
-    ref6: '16881451', // Customer Label 
-    ref8: 'Start machine via DuitNow', // Purpose of Transaction
-    ref82: '7FFC1AC00E99EA2D7A0D7BB79755736A' // unknown Ref Number
+    id62ref5: '0.1626.0', // Reference Label
+    id62ref6: '16881451', // Customer Label 
+    id62ref8: 'Start machine via DuitNow', // Purpose of Transaction
+    id62ref82: '7FFC1AC00E99EA2D7A0D7BB79755736A' // unknown Ref Number
 
 })
 
@@ -46,9 +46,9 @@ const qr4 = generateDuitNowStr({
     category: '7399', // unknown Merchant Category Code
     name: 'NUNU APPAREL',
     postcode: '14200',
-    ref3: 'ROA050888', // Store Label 
-    ref7: '173035', // Terminal Label 
-    ref82: '9CA02A0851CC2F6B40C1DC180AA2A84A31475C58253CB22FD3EDAD88E8616FE5' // unknown Ref Number
+    id62ref3: 'ROA050888', // Store Label 
+    id62ref7: '173035', // Terminal Label 
+    id62ref82: '9CA02A0851CC2F6B40C1DC180AA2A84A31475C58253CB22FD3EDAD88E8616FE5' // unknown Ref Number
 
 })
 
@@ -67,4 +67,5 @@ const qr3 = generateDuitNowStr({
 
 // assert.equal(string3, qr3)
 
-qrcode.generate(qr3)
+
+qrcode.generate(qr3); //Generate QR
