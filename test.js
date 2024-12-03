@@ -1,5 +1,5 @@
 
-const { generateDuitNowStr } = require('duitnow-js')
+const { generateDuitNowStr,breakDownQR } = require('duitnow-js')
 const assert = require('assert')
 const qrcode = require('qrcode-terminal')
 
@@ -69,3 +69,44 @@ const qr3 = generateDuitNowStr({
 
 
 qrcode.generate(qr3); //Generate QR
+// console.log(breakDownQR(qr3)); //breakdown the qr string
+// generateHTMLPinkWhiteQR(qr3); //Generate QR in Pink, but only in html.
+
+
+function generateHTMLPinkWhiteQR(qrString){
+    const QRCode = require('qrcode');
+    const fs = require('fs');
+
+    // customizing the QR code color
+    const options = {
+    color: {
+        dark: "#FF1493", // Pink color
+        light: "#FFFFFF", // White background 
+    },
+    };
+
+    // Generate QR Code as a base64 URL
+    QRCode.toDataURL(qrString, options, function (err, url) {
+    if (err) throw err;
+
+    // Output the generated QR code URL (base64-encoded image)
+    console.log("Generated QR Code URL:", url);
+
+    // Create an HTML file to display the QR code image
+    const html = `
+        <html>
+        <head>
+            <title>Pink QR Code</title>
+        </head>
+        <body>
+            <h1>Generated QR Code</h1>
+            <img src="${url}" alt="Pink QR Code"/>
+        </body>
+        </html>
+    `;
+
+    // Save the HTML to a file
+    fs.writeFileSync('pink-qr-code.html', html);
+    console.log("HTML file saved as pink-qr-code.html");
+    });
+}
