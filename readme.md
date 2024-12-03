@@ -1,40 +1,75 @@
 
 ## DuitNow QR Code Generator Test
 
-i found there's an interesting use case of DuitNow from [@kidino](https://www.github.com/kidino), where you would scan a DuitNow QR code on an electric massage chair, then the chair would work after you successfully paid.
+This is largely forked from (https://github.com/natsu90/duitnowqr-test).
+Researching DuitNowQR for future projects. You might wanna view his 'readMe' before continuing with mine.
+Compared to other projects of DuitNowQR, am very appreciative of his comprehensive yet concised readMe.
 
-so i tried to find a way to generate your own DuitNow QR, without going through the banking app, but it seems to be that some organisation (looking at you [@paynet-my](https://www.github.com/paynet-my)) is trying to gatekeep this info.
+Thus far I.ve done...
+1. breakDownQR function, to break down QR string, and show it in the form of list<dictionary>. (Easier on the eyes)
+2. generateHTMLPinkWhiteQR function, generate pink-white QR, saved in the form of HTML. (Had trouble changing colour via qrcode.generate())
+3. Add some additional fields based on the DuitNow standard v1.4 (remained remark/commented)
+4. Lengthy explanation on how to understand QR string below
 
-in case of PayNow, generating a PayNow QR code is quite straight forward when you already have your own PayNow ID. but generating a DuitNow QR is a pain in the ass with seems to be unnecessary complexity.
+### How To Read QR String
+```
+Sample String: 00020201021126440014A0000006150001010689005302121102928373325204000053034585802MY5910JAMESONLAM6002MY6213060988866479363043A1C
+1. 2 Char = ID
+2. 2 Char = Length of value
+3. Value
 
-below is the source code of DuitNow QR generator after reverse engineering a lot of DuitNow QRs. but i still can't manage to get how we could get the `account` and `app` value, or simply implement it with our own DuitNow ID like PayNow do.
+So... it's like [{id:"00", value:"02"}, {id:"01", value:"11"}, {id:"26", value:"0014A000000615000101068900530212110292837332"}, {id:"52", value:"0000"}, {id:"53", value:"458"}...]
+id | length | values
+00 |     02 | 02
+01 |     02 | 11
+26 |     44 | 0014A000000615000101068900530212110292837332
+52 |     04 | 0000 
+53 |     03 | 458
 
-### Source
 
-[https://gist.github.com/natsu90/f45dc88b38a037325ad9095163b82b42](https://gist.github.com/natsu90/f45dc88b38a037325ad9095163b82b42)
+However, unlike id:26, its value is in array form... so we need to do the breaking down again
+0014A000000615000101068900530212110292837332
+id | length | values
+00 |     14 | A0000006150001
+01 |     06 | 890053
+02 |     12 | 110292837332
 
+
+Which ultimately becomes...
+{id:"26", value: [{id:"00", value:"A0000006150001"},{id:"01", value:"890053"},{id:"02", value:"110292837332"}]}
+```
 
 ### Usage
 
 ```
-npm install gist:f45dc88b38a037325ad9095163b82b42
+npm install gist:6ed0e8ddaab9c7dd9b38b053410cbcb0
 ```
 
 ```
-const { generateDuitNowStr } = require('duitnow-js')
+const cimbDuitNow = "xxxx" ///replace "xxxx" with the string you received by scanning a DuitNow QR
+console.log(breakDownQR(cimbDuitNow));  ///run this to breakdown the strings
 
-const qrString = generateDuitNowStr({
-    account: '0000000000000000000000072339', // UNKNOWN Account ID
-    app: '890087', // UNKNOWN ID
-    category: '7399', // Merchant Category Code
-    name: 'GINTELL REST N GO SDN BHD',
-    city: 'KEPONG MENJALARA',
-    postcode: '52200',
-    ref5: '0.1626.0', // Reference Label
-    ref6: '16881451', // Customer Label 
-    ref8: 'Start machine via DuitNow', // Purpose of Transaction
-    ref82: '7FFC1AC00E99EA2D7A0D7BB79755736A' // unknown Ref Number
+results look smth like...
+[
+  { id: '00', value: '02' },
+  { id: '01', value: '11' },
+  { id: '26', value: '0014A000000615000101068900530212110292837332' },
+  { id: '52', value: '0000' },
+  { id: '53', value: '458' },
+  { id: '58', value: 'MY' },
+  { id: '59', value: 'JAMESONLAM' },
+  { id: '60', value: 'MY' },
+  { id: '62', value: '0609888664793' },
+  { id: '63', value: '3A1C' }
+]
 
+Based on the results, fill in the values or set more arguments.
+const qrCimbDuitNow = generateDuitNowStr({
+    app: "xxxxx",
+    account: "xxxxx",
+    name: "xxxxx",
+    id62ref: "xxx",
+    id62ref82: "xxx"
 })
 
 ```
@@ -63,6 +98,7 @@ npm run test
 
 ### Credits
 
+[https://github.com/natsu90/duitnowqr-test](https://github.com/natsu90/duitnowqr-test)
 [https://gist.github.com/chengkiang/7e1c4899768245570cc49c7d23bc394c](https://gist.github.com/chengkiang/7e1c4899768245570cc49c7d23bc394c)
 
 ### License
