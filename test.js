@@ -78,10 +78,23 @@ const qrTngReceiveQR = generateDuitNowStr({
 assert.equal(tngReceiveQR, qrTngReceiveQR)
 
 
+//!!! Try this with your own duitNow !!tis one won't work due to for privacy purpose
+const cimbDuitNow = "xxxx"
+const qrCimbDuitNow = generateDuitNowStr({
+    app: "xxxxx",
+    account: "xxxxx",
+    name: "xxxxx",
+    id62ref: "xxx",
+    id62ref82: "xxx"
+})
 
-// qrcode.generate(qr3); //Generate QR
-// console.log(breakDownQR(qr3)); //breakdown the qr string
-generateHTMLPinkWhiteQR(qrTngDuitNow); //Generate QR in Pink, but only in html.
+assert.equal(cimbDuitNow, qrCimbDuitNow)
+
+
+
+// qrcode.generate(cimbDuitNow); //Generate QR
+// console.log(breakDownQR(cimbDuitNow)); //breakdown the qr string
+generateHTMLPinkWhiteQR(cimbDuitNow); //Generate QR in Pink, but only in html.
 
 
 
