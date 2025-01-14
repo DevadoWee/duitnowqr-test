@@ -93,7 +93,7 @@ assert.equal(cimbDuitNow, qrCimbDuitNow)
 
 
 // qrcode.generate(cimbDuitNow); //Generate QR
-// console.log(breakDownQR(cimbDuitNow)); //breakdown the qr string
+// console.table(breakDownQR(cimbDuitNow)); //breakdown the qr string
 generateHTMLPinkWhiteQR(cimbDuitNow); //Generate QR in Pink, but only in html.
 
 
